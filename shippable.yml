@@ -1,0 +1,6 @@
+language: python
+
+build:
+  ci:
+    - docker build -t ansible-base-test-container .
+    - docker history  ansible-base-test-container
