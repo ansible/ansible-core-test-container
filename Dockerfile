@@ -1,4 +1,4 @@
-FROM quay.io/ansible/default-test-container:2.0
+FROM quay.io/ansible/default-test-container:2.1
 
 COPY files/requirements.sh /tmp/requirements-base.sh
 COPY requirements/*.txt /tmp/requirements-base/
