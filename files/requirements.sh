@@ -11,6 +11,7 @@ echo "==> Selecting requirements for python ${python_version}"
 
 freeze_dir="$(dirname "$0")/freeze-base"
 requirements_dir="$(dirname "$0")/requirements-base"
+default_requirements_dir="$(dirname "$0")/requirements"
 
 version_requirements=()
 
@@ -25,30 +26,31 @@ else
     echo "Using requirements directory: ${requirements_dir}"
     cd "${requirements_dir}"
 
-    constraints="${requirements_dir}/constraints.txt"
+    constraints="${default_requirements_dir}/constraints.txt"
 
     requirements=()
 
     for requirement in *.txt; do
-        if [[ "${requirement}" != "constraints.txt" ]]; then
-            requirements+=("${requirement}")
-        fi
+        requirements+=("${requirement}")
     done
 
     for requirement in "${requirements[@]}"; do
-        if [[ "${requirement}" == "ansible-sanity.txt" ]]; then
+        if [[ "${requirement}" =~ sanity\. ]]; then
             # additional sanity test requirements are only needed for python 3.6
             if [[ "${python_version}" != "3.6" ]]; then
                 continue
             fi
-        elif [[ "${requirement}" == "ansible-units.txt" ]]; then
+        elif [[ "${requirement}" =~ units\. ]]; then
             # unit tests run against all python versions
             true
-        else
+        elif [[ "${requirement}" =~ integration\. ]]; then
             # integration tests run on python 2.7 and python 3.6
             if [[ "${python_version}" != "2.7" ]] && [[ "${python_version}" != "3.6" ]]; then
                 continue
             fi
+        else
+            echo "ERROR: unhandled requirements file: ${requirement}"
+            exit 1
         fi
 
         version_requirements+=("${requirement}")
