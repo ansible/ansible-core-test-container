@@ -11,6 +11,7 @@ echo "==> Selecting requirements for python ${python_version}"
 
 freeze_dir="$(dirname "$0")/freeze-base"
 requirements_dir="$(dirname "$0")/requirements-base"
+default_requirements_dir="$(dirname "$0")/requirements"
 
 version_requirements=()
 
@@ -25,14 +26,12 @@ else
     echo "Using requirements directory: ${requirements_dir}"
     cd "${requirements_dir}"
 
-    constraints="${requirements_dir}/constraints.txt"
+    constraints="${default_requirements_dir}/constraints.txt"
 
     requirements=()
 
     for requirement in *.txt; do
-        if [[ "${requirement}" != "constraints.txt" ]]; then
-            requirements+=("${requirement}")
-        fi
+        requirements+=("${requirement}")
     done
 
     for requirement in "${requirements[@]}"; do
