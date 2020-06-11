@@ -35,19 +35,22 @@ else
     done
 
     for requirement in "${requirements[@]}"; do
-        if [[ "${requirement}" == "ansible-sanity.txt" ]]; then
+        if [[ "${requirement}" =~ sanity\. ]]; then
             # additional sanity test requirements are only needed for python 3.6
             if [[ "${python_version}" != "3.6" ]]; then
                 continue
             fi
-        elif [[ "${requirement}" == "ansible-units.txt" ]]; then
+        elif [[ "${requirement}" =~ units\. ]]; then
             # unit tests run against all python versions
             true
-        else
+        elif [[ "${requirement}" =~ integration\. ]]; then
             # integration tests run on python 2.7 and python 3.6
             if [[ "${python_version}" != "2.7" ]] && [[ "${python_version}" != "3.6" ]]; then
                 continue
             fi
+        else
+            echo "ERROR: unhandled requirements file: ${requirement}"
+            exit 1
         fi
 
         version_requirements+=("${requirement}")
