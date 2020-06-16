@@ -44,8 +44,8 @@ azure-storage==0.35.1
 Babel==2.8.0
 bcrypt==3.1.7
 boto==2.49.0
-boto3==1.14.1
-botocore==1.17.1
+boto3==1.14.4
+botocore==1.17.4
 cachetools==4.1.0
 certifi==2020.4.5.2
 cffi==1.14.0
@@ -61,8 +61,8 @@ docutils==0.15.2
 ecdsa==0.15
 execnet==1.7.1
 future==0.18.2
-google-auth==1.17.0
-hcloud==1.7.0
+google-auth==1.17.2
+hcloud==1.7.1
 humanfriendly==8.2
 idna==2.5
 imagesize==1.2.0
@@ -81,17 +81,17 @@ lxml==4.5.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mock==4.0.2
-more-itertools==8.3.0
+more-itertools==8.4.0
 msgpack==1.0.0
 msrest==0.6.10
 msrestazure==0.6.2
 netaddr==0.7.19
 netifaces==0.10.9
-# nsx-policy-python-sdk==2.5.1.0.1.15419398 # package does not exist on PyPI
-# nsx-python-sdk==2.5.1.0.1.15419398 # package does not exist on PyPI
-# nsx-vmc-aws-integration-python-sdk==2.5.1.0.1.15419398 # package does not exist on PyPI
-# nsx-vmc-policy-python-sdk==2.5.1.0.1.15419398 # package does not exist on PyPI
-ntlm-auth==1.4.0
+# nsx-policy-python-sdk==2.5.1.0.5.16221899 # package does not exist on PyPI
+# nsx-python-sdk==2.5.1.0.5.16221899 # package does not exist on PyPI
+# nsx-vmc-aws-integration-python-sdk==2.5.1.0.5.16221899 # package does not exist on PyPI
+# nsx-vmc-policy-python-sdk==2.5.1.0.5.16221899 # package does not exist on PyPI
+ntlm-auth==1.5.0
 oauthlib==3.1.0
 openshift==0.8.9
 oslo.config==8.1.0
@@ -108,7 +108,7 @@ pbr==5.4.5
 pexpect==4.8.0
 pluggy==0.13.1
 ptyprocess==0.6.0
-py==1.8.1
+py==1.8.2
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycodestyle==2.6.0
@@ -133,12 +133,12 @@ pytz==2020.1
 pyvmomi==7.0
 pywinrm==0.4.1
 PyYAML==5.3.1
-requests==2.22.0
+requests==2.23.0
 requests-credssp==1.1.1
 requests-ntlm==1.1.0
 requests-oauthlib==1.3.0
 rfc3986==1.4.0
-rsa==4.2
+rsa==4.6
 rstcheck==3.3.1
 ruamel.yaml==0.16.10
 ruamel.yaml.clib==0.2.0
