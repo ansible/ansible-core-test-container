@@ -2,18 +2,18 @@
 
 set -eu -o pipefail
 
-versions=$(grep '^RUN /tmp/requirements-base.sh ' Dockerfile | sed 's|^RUN /tmp/requirements-base.sh ||;')
+versions=$(grep '^RUN /tmp/requirements-core.sh ' Dockerfile | sed 's|^RUN /tmp/requirements-core.sh ||;')
 
 echo "Purging existing frozen requirements ..."
 rm -f freeze/*
 
 echo "Building a container to freeze the requirements ..."
 
-docker build -t ansible-base-test-container-freezer .
+docker build -t ansible-core-test-container-freezer .
 
 for version in ${versions}; do
     echo "Freezing requirements for Python ${version} ..."
-    docker run -it ansible-base-test-container-freezer "pip${version}" freeze -qqq --disable-pip-version-check | tr -d '\r' > "freeze/${version}.txt"
+    docker run -it ansible-core-test-container-freezer "pip${version}" freeze -qqq --disable-pip-version-check | tr -d '\r' > "freeze/${version}.txt"
 done
 
 echo "Fixing bad frozen versions ..."

@@ -8,7 +8,7 @@ pool:
   vmImage: 'ubuntu-18.04'
 
 steps:
-  - script: docker build -t ansible-base-test-container .
+  - script: docker build -t ansible-core-test-container .
     displayName: Build Container
-  - script: docker history ansible-base-test-container
+  - script: docker history ansible-core-test-container
     displayName: Show History
