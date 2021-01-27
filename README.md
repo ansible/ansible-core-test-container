@@ -1,2 +1,2 @@
-# ansible-base-test-container
-Container used by ansible-base for distribution independent tests.
+# ansible-core-test-container
+Container used by ansible-core for distribution independent tests.

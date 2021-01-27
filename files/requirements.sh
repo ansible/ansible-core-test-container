@@ -9,8 +9,8 @@ echo "==> Checking full python version for python ${python_version}"
 
 echo "==> Selecting requirements for python ${python_version}"
 
-freeze_dir="$(dirname "$0")/freeze-base"
-requirements_dir="$(dirname "$0")/requirements-base"
+freeze_dir="$(dirname "$0")/freeze-core"
+requirements_dir="$(dirname "$0")/requirements-core"
 default_requirements_dir="$(dirname "$0")/requirements"
 
 version_requirements=()
