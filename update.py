@@ -37,6 +37,18 @@ def main():
                     if not item['name'].startswith('integration.cloud.'):
                         continue
 
+                    # skip requirements no longer being tested in ansible-core
+                    if item['name'] in (
+                        'integration.cloud.azure.txt',
+                        'integration.cloud.cs.txt',
+                        'integration.cloud.hcloud.txt',
+                        'integration.cloud.nios.txt',
+                        'integration.cloud.opennebula.txt',
+                        'integration.cloud.openshift.txt',
+                        'integration.cloud.vcenter.txt',
+                    ):
+                        continue
+
                 files.append(item)
 
     requirements_dir = 'requirements'
