@@ -44,6 +44,7 @@ PyYAML==3.13
 requests==2.19.1
 requests-credssp==1.1.1
 requests-ntlm==1.1.0
+resolvelib==0.5.4
 six==1.13.0
 traceback2==1.4.0
 unittest2==1.1.0
