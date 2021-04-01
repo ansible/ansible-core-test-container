@@ -79,6 +79,11 @@ pip_install=("${pip[@]}" install)
 pip_list=("${pip[@]}" list "--format=columns")
 pip_check=("${pip[@]}" check)
 
+if [[ "${python_version}" = "2.6" ]]; then
+    pip_install+=(--index https://d2c8fqinjk13kw.cloudfront.net/simple/)
+    cp /tmp/pydistutils.cfg ~/.pydistutils.cfg
+fi
+
 if [[ "${python_version}" = "3.8" ]]; then
     pip_install+=(--no-warn-script-location)
 fi
@@ -119,3 +124,5 @@ echo "==> Checking for conflicts between installed packages for python ${python_
 "${pip_check[@]}"
 
 echo "==> Finished with requirements for python ${python_version}"
+
+rm -f ~/.pydistutils.cfg
