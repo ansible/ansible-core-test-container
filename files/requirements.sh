@@ -36,8 +36,8 @@ else
 
     for requirement in "${requirements[@]}"; do
         if [[ "${requirement}" =~ sanity\. ]]; then
-            # additional sanity test requirements are only needed for python 3.6
-            if [[ "${python_version}" != "3.6" ]]; then
+            # additional sanity test requirements are only needed for the default python
+            if [[ "${python_version}" != "3.9" ]]; then
                 continue
             fi
         elif [[ "${requirement}" =~ units\. ]]; then
