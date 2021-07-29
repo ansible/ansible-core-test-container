@@ -1,4 +1,4 @@
-FROM quay.io/ansible/default-test-container:3.5.0
+FROM quay.io/ansible/default-test-container:3.6.0
 
 COPY files/requirements.sh /tmp/requirements-core.sh
 COPY requirements/*.txt /tmp/requirements-core/
