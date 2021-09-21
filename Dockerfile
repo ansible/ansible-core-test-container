@@ -1,14 +1,10 @@
-FROM quay.io/ansible/default-test-container:3.8.0
+FROM quay.io/ansible/default-test-container:4.0.0
 
-COPY files/requirements.sh /tmp/requirements-core.sh
-COPY requirements/*.txt /tmp/requirements-core/
-COPY freeze/*.txt /tmp/freeze-core/
+# increment the number in this file to force a full container rebuild
+COPY files/update.txt /dev/null
 
-RUN /tmp/requirements-core.sh 2.6
-RUN /tmp/requirements-core.sh 2.7
-RUN /tmp/requirements-core.sh 3.5
-RUN /tmp/requirements-core.sh 3.7
-RUN /tmp/requirements-core.sh 3.8
-RUN /tmp/requirements-core.sh 3.9
-RUN /tmp/requirements-core.sh 3.10
-RUN /tmp/requirements-core.sh 3.6
+COPY requirements /usr/share/container-setup/ansible-core/requirements/
+COPY freeze /usr/share/container-setup/ansible-core/freeze/
+
+RUN python3.10 /usr/share/container-setup/requirements.py ansible-core
+RUN python3.9 /usr/share/container-setup/prime.py ansible-core
