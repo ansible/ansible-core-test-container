@@ -1,17 +1,27 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Update requirements from the ansible/ansible repository."""
 
 import json
 import os
+import re
+import subprocess
 import sys
 import urllib.request
 
 
 def main():
     """Main program entry point."""
+    with open('Dockerfile') as dockerfile:
+        docker_from = dockerfile.readline()
+
+    image = re.search('^FROM (?P<image>.*)$', docker_from).group('image')
+
+    result = subprocess.run(['docker', 'run', '-it', image, 'cat', '/usr/share/container-setup/ansible-test-ref.txt'],
+                            check=True, capture_output=True, text=True)
+
+    ref = result.stdout.strip()
 
     source_requirements = {
-        'https://api.github.com/repos/ansible/ansible/contents/test/sanity/code-smell/': 'sanity',
         'https://api.github.com/repos/ansible/ansible/contents/test/units/': 'units',
         'https://api.github.com/repos/ansible/ansible/contents/test/integration/': 'integration',
         'https://api.github.com/repos/ansible/ansible/contents/test/lib/ansible_test/_data/requirements/': '',
@@ -21,7 +31,7 @@ def main():
     untouched_mappings = {}
 
     for url, label in source_requirements.items():
-        with urllib.request.urlopen(url) as response:
+        with urllib.request.urlopen(f'{url}?ref={ref}') as response:
             content = json.loads(response.read().decode())
 
             if not isinstance(content, list):
@@ -33,21 +43,8 @@ def main():
                         continue
 
                     item['name'] = '%s.%s' % (label, item['name'])
-                else:
-                    if not item['name'].startswith('integration.cloud.'):
-                        continue
-
-                    # skip requirements no longer being tested in ansible-core
-                    if item['name'] in (
-                        'integration.cloud.azure.txt',
-                        'integration.cloud.cs.txt',
-                        'integration.cloud.hcloud.txt',
-                        'integration.cloud.nios.txt',
-                        'integration.cloud.opennebula.txt',
-                        'integration.cloud.openshift.txt',
-                        'integration.cloud.vcenter.txt',
-                    ):
-                        continue
+                elif item['name'] != 'constraints.txt':
+                    continue
 
                 files.append(item)
 
