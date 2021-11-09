@@ -22,9 +22,9 @@ def main():
     ref = result.stdout.strip()
 
     source_requirements = {
-        'https://api.github.com/repos/ansible/ansible/contents/test/units/': 'units',
-        'https://api.github.com/repos/ansible/ansible/contents/test/integration/': 'integration',
-        'https://api.github.com/repos/ansible/ansible/contents/test/lib/ansible_test/_data/requirements/': '',
+        'https://api.github.com/repos/ansible/ansible/contents/test/units': 'units',
+        'https://api.github.com/repos/ansible/ansible/contents/test/integration': 'integration',
+        'https://api.github.com/repos/ansible/ansible/contents/test/lib/ansible_test/_data/requirements': '',
     }
 
     files = []
