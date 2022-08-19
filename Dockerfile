@@ -1,10 +1,7 @@
-FROM quay.io/ansible/default-test-container:6.6.0
-
-# increment the number in this file to force a full container rebuild
-COPY files/update.txt /dev/null
+FROM quay.io/ansible/default-test-container:6.7.0
 
 COPY requirements /usr/share/container-setup/ansible-core/requirements/
 COPY freeze /usr/share/container-setup/ansible-core/freeze/
 
-RUN python3.10 /usr/share/container-setup/requirements.py ansible-core
-RUN python3.10 /usr/share/container-setup/prime.py ansible-core
+RUN python3.10 -B /usr/share/container-setup/requirements.py ansible-core
+RUN python3.10 -B /usr/share/container-setup/prime.py ansible-core
