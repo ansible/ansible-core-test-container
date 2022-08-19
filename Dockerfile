@@ -1,4 +1,4 @@
-FROM quay.io/ansible/default-test-container:6.6.0
+FROM quay.io/ansible/default-test-container:6.7.0
 
 # increment the number in this file to force a full container rebuild
 COPY files/update.txt /dev/null
