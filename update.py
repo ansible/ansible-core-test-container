@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Update requirements from the ansible/ansible repository."""
 
+import argparse
 import json
 import os
 import re
@@ -11,12 +12,18 @@ import urllib.request
 
 def main():
     """Main program entry point."""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--container-runtime', default='docker', required=False)
+
+    args = parser.parse_args()
+    container_runtime = args.container_runtime
+
     with open('Dockerfile') as dockerfile:
         docker_from = dockerfile.readline()
 
     image = re.search('^FROM (?P<image>.*)$', docker_from).group('image')
 
-    result = subprocess.run(['docker', 'run', '-it', image, 'cat', '/usr/share/container-setup/ansible-test-ref.txt'],
+    result = subprocess.run([container_runtime, 'run', '-it', image, 'cat', '/usr/share/container-setup/ansible-test-ref.txt'],
                             check=True, capture_output=True, text=True)
 
     ref = result.stdout.strip()
