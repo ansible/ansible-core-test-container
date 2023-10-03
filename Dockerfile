@@ -1,4 +1,4 @@
-FROM quay.io/ansible/default-test-container:9.1.0
+FROM quay.io/ansible/default-test-container:9.2.0
 
 COPY requirements /usr/share/container-setup/ansible-core/requirements/
 COPY freeze /usr/share/container-setup/ansible-core/freeze/
