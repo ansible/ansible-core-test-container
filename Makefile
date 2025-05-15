@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	docker build -t ansible-core-test-container .
+	podman build -t ansible-core-test-container .
 
 .PHONY: update
 update:

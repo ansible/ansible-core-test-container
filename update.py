@@ -13,7 +13,7 @@ import urllib.request
 def main():
     """Main program entry point."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('--container-runtime', default='docker', required=False)
+    parser.add_argument('--container-runtime', default='podman', required=False)
 
     args = parser.parse_args()
     container_runtime = args.container_runtime
