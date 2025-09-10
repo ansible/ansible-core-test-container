@@ -13,15 +13,15 @@ import urllib.request
 def main():
     """Main program entry point."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('--container-runtime', default='podman', required=False)
+    parser.add_argument('--container-runtime', default='podman')
 
     args = parser.parse_args()
     container_runtime = args.container_runtime
 
-    with open('Dockerfile') as dockerfile:
-        docker_from = dockerfile.readline()
+    with open('Containerfile') as containerfile:
+        from_statement = containerfile.readline()
 
-    image = re.search('^FROM (?P<image>.*)$', docker_from).group('image')
+    image = re.search('^FROM (?P<image>.*)$', from_statement).group('image')
 
     result = subprocess.run([container_runtime, 'run', '-it', image, 'cat', '/usr/share/container-setup/ansible-test-ref.txt'],
                             check=True, capture_output=True, text=True)
