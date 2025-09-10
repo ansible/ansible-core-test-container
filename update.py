@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     container_runtime = args.container_runtime
 
-    with open('Dockerfile') as dockerfile:
+    with open('Containerfile') as dockerfile:
         docker_from = dockerfile.readline()
 
     image = re.search('^FROM (?P<image>.*)$', docker_from).group('image')
